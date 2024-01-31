@@ -17,7 +17,7 @@ end
 post "/add_task" do
   name = params[:name]
   # Create new instance of Task
-  task = Task.new(name)
+  task = Task.new({name: name})
 
   #Save to repo
   repository.add(task)

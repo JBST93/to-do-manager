@@ -1,5 +1,6 @@
 class Task
-  attr_reader :id, :name, :done
+  attr_reader :name, :done
+  attr_accessor :id
 
   def initialize(attr = {})
     @id = attr[:id]
