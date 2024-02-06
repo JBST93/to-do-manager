@@ -7,7 +7,7 @@ Current Time <%= Time.now %>
 
 <ul>
   <% @tasks.each do |task| %>
-    <li><%= task.id %> - <%= task.name %> - <%= task.done == "true" ? "[X]" : "[ ]" %></li>
+    <li><%= task.id %> - <%= task.name %> - <%= task.datetime%> - Mark As Done</li>
   <% end %>
 </ul>
 

@@ -2,15 +2,16 @@ require "sinatra"
 require "sinatra/reloader" if development?
 require "pry-byebug"
 
-require_relative 'app/repositories/repository/'
-require_relative 'app/models/task'
+require "sinatra/activerecord"
+set :database, {adapter: "sqlite3", database: "to_do.sqlite3"}
 
-csv_file = File.join(__dir__, 'data/tasks.csv')
-repository = Repository.new(csv_file)
+
+
+
 
 get "/" do
     #List_all tasks from the Repository
-    @tasks = repository.all
+    @tasks = Task.all
   erb :'/index'
 end
 
