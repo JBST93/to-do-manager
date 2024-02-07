@@ -27,3 +27,10 @@ post "/add_task" do
   task = Task.create({name: name})
   redirect "/"
 end
+
+
+post "/delete_task" do
+  p id = params[:id]
+  Task.find(id).destroy
+  redirect "/"
+end
