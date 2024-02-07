@@ -3,11 +3,17 @@ require "sinatra/reloader" if development?
 require "pry-byebug"
 
 require "sinatra/activerecord"
-set :database, {adapter: "sqlite3", database: "to_do.sqlite3"}
+require_relative 'app/models/task.rb'
+require_relative "config/application"
 
 
+set :root, File.expand_path("", __dir__)
+set :views, proc { File.join(root, "app/views") }
+set :bind, '0.0.0.0'
 
-
+after do
+  ActiveRecord::Base.connection.close
+end
 
 get "/" do
     #List_all tasks from the Repository
@@ -18,10 +24,6 @@ end
 post "/add_task" do
   name = params[:name]
   # Create new instance of Task
-  task = Task.new({name: name})
-
-  #Save to repo
-  repository.add(task)
+  task = Task.create({name: name})
   redirect "/"
-
 end
